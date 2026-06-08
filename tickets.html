@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tickets - El PataRock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir);
+            color: var(--vintage-bone);
+            background-image: radial-gradient(circle at top, var(--purple-haze), var(--grunge-noir));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+/* Navbar */
+        header {
+            background-color: var(--grunge-noir); /* Fondo oscuro para resaltar el logo */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze); /* Línea sutil para separar */
+        }
+        
+        .logo-nav { 
+            height: 45px; /* Un poco más grande para que se lea bien el estilo grunge */
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3)); /* Brillo fucsia sutil */
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        main h1 {
+            font-size: 48px;
+            color: var(--fuchsia-fuzz);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        main p.subtitle {
+            font-size: 18px;
+            margin-bottom: 50px;
+            color: #ccc;
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .pricing-card {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            width: 300px;
+            padding: 40px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            border-top: 8px solid var(--rock-violet);
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured {
+            border-top: 8px solid var(--fuchsia-fuzz);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        /* Icono del perrito */
+        .card-icon {
+            height: 80px;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .pricing-card h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: var(--purple-haze);
+        }
+
+        .price {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--fuchsia-fuzz);
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 30px;
+            flex: 1;
+        }
+
+        .features li {
+            margin-bottom: 10px;
+            font-size: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        .btn-buy {
+            background-color: var(--purple-haze);
+            color: var(--vintage-bone);
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: 'Anton', sans-serif;
+            font-size: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .featured .btn-buy {
+            background-color: var(--fuchsia-fuzz);
+        }
+
+        .btn-buy:hover {
+            background-color: var(--grunge-noir);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 30px;
+            color: var(--vintage-bone);
+            margin-top: auto;
+        }
+        footer .socials { margin-bottom: 15px; }
+        footer .socials span { 
+            display: inline-block; width: 30px; height: 30px; 
+            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
+        }
+        footer p { font-weight: 600; line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .pricing-card.featured { transform: scale(1); }
+            .pricing-card.featured:hover { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+
+	<header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Tu entrada hace la diferencia</h1>
+        <p class="subtitle">Elegí tu pase. El 100% de la recaudación se destina al rescate animal.</p>
+
+        <div class="pricing-grid">
+            
+            <div class="pricing-card">
+                <img src="img/icon-dog-1.png" alt="Icono General" class="card-icon">
+                <h2>GENERAL</h2>
+                <div class="price">$35.000</div>
+                <ul class="features">
+                    <li>Acceso general a los 2 días</li>
+                    <li>Zona de descanso</li>
+                    <li>Patio Gastronómico</li>
+                </ul>
+                <a href="checkout.html" class="btn-buy">COMPRAR AHORA</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <img src="img/icon-dog-2.png" alt="Icono VIP" class="card-icon">
+                <h2>PATA VIP</h2>
+                <div class="price">$60.000</div>
+                <ul class="features">
+                    <li>Acceso VIP a los 2 días</li>
+                    <li>Zona preferencial frente al escenario</li>
+                    <li>Meet & Greet con artistas</li>
+                    <li>Baños exclusivos</li>
+                </ul>
+                <a href="checkout.html" class="btn-buy">COMPRAR AHORA</a>
+            </div>
+
+            <div class="pricing-card">
+                <img src="img/icon-dog-3.png" alt="Icono Familiar" class="card-icon">
+                <h2>PACK FAMILIAR</h2>
+                <div class="price">$100.000</div>
+                <ul class="features">
+                    <li>4 Entradas Generales</li>
+                    <li>Acceso a zona familiar</li>
+                    <li>Actividades infantiles</li>
+                </ul>
+                <a href="checkout.html" class="btn-buy">COMPRAR AHORA</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - El PataRock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir);
+            background-image: radial-gradient(circle at top, var(--purple-haze), var(--grunge-noir));
+            color: var(--grunge-noir);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            background-color: var(--vintage-bone);
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        /* Progress Bar */
+        .progress-header {
+            background-color: var(--purple-haze);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--vintage-bone);
+        }
+
+        .step-indicator {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .step-indicator.active {
+            opacity: 1;
+            color: var(--fuchsia-fuzz);
+        }
+
+        .step-num {
+            background-color: rgba(255,255,255,0.2);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 8px;
+        }
+
+        .step-indicator.active .step-num {
+            background-color: var(--fuchsia-fuzz);
+            color: white;
+        }
+
+        /* Form Content */
+        .step-content {
+            display: none;
+            padding: 40px;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        h2 {
+            font-family: 'Anton', sans-serif;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--purple-haze);
+            letter-spacing: 1px;
+        }
+
+        /* Utilidad para el resumen */
+        .summary-item {
+            display: flex; 
+            justify-content: space-between; 
+            border-bottom: 1px solid #ccc; 
+            padding-bottom: 15px; 
+            margin-bottom: 15px;
+        }
+
+        .card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--rock-violet);
+        }
+
+        /* Inputs */
+        .form-group { margin-bottom: 15px; }
+        .form-row { display: flex; gap: 15px; }
+        .form-row .form-group { flex: 1; }
+
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            background-color: transparent;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--fuchsia-fuzz);
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--fuchsia-fuzz);
+            color: white;
+            margin-left: auto;
+        }
+
+        .btn-primary:hover { background-color: #b5156f; }
+
+        .btn-secondary {
+            background-color: transparent;
+            border: 2px solid var(--purple-haze);
+            color: var(--purple-haze);
+        }
+
+        .btn-secondary:hover { background-color: rgba(42, 11, 66, 0.1); }
+
+        /* Success Message */
+        .success-message { text-align: center; }
+        .success-message h2 { color: var(--fuchsia-fuzz); font-size: 40px; display: block; }
+        .success-message p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 600px) {
+            .step-indicator span:not(.step-num) { display: none; }
+            .form-row { flex-direction: column; gap: 0; }
+            .step-content { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="checkout-container">
+        <div class="progress-header" id="progressHeader">
+            <div class="step-indicator active" id="ind-1"><div class="step-num">1</div><span>ENTRADAS</span></div>
+            <div class="step-indicator" id="ind-2"><div class="step-num">2</div><span>DATOS</span></div>
+            <div class="step-indicator" id="ind-3"><div class="step-num">3</div><span>PAGO</span></div>
+            <div class="step-indicator" id="ind-4"><div class="step-num">4</div><span>RESUMEN</span></div>
+        </div>
+
+        <form id="checkoutForm">
+            <div class="step-content active" id="step-1">
+                <h2>SELECCIÓN DE ENTRADAS</h2>
+                <div class="card">
+                    <div>
+                        <h3>PASE GENERAL - 2 DÍAS</h3>
+                        <p style="font-size:14px; color:#666;">Acceso completo al campo durante los 2 días.</p>
+                        <div class="price">$35.000</div>
+                    </div>
+                    <div><input type="number" id="qty-general" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>PATA VIP - EXPERIENCIA</h3>
+                        <p style="font-size:14px; color:#666;">Zona exclusiva, meet & greet y food trucks.</p>
+                        <div class="price">$60.000</div>
+                    </div>
+                    <div><input type="number" id="qty-vip" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                </div>
+                <div class="card">
+                    <div>
+                        <h3>PACK FAMILIAR</h3>
+                        <p style="font-size:14px; color:#666;">4 Entradas Generales + Zona familiar.</p>
+                        <div class="price">$100.000</div>
+                    </div>
+                    <div><input type="number" id="qty-familiar" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                </div>
+                <div class="btn-container">
+                    <button type="button" class="btn-primary" onclick="nextStep(2)">Continuar a mis datos →</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step-2">
+                <h2>DATOS DEL COMPRADOR</h2>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre completo" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><input type="text" placeholder="DNI" required></div>
+                    <div class="form-group"><input type="text" placeholder="Teléfono" required></div>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="userEmail" placeholder="Email" required>
+                </div>
+                <div class="btn-container">
+                    <button type="button" class="btn-secondary" onclick="prevStep(1)">← Volver</button>
+                    <button type="button" class="btn-primary" onclick="nextStep(3)">Continuar al pago →</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step-3">
+                <h2>DETALLES DE PAGO</h2>
+                <div class="form-group">
+                    <input type="text" placeholder="Número de tarjeta (Ej: 4500 1234 ...)" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" placeholder="Nombre como figura en la tarjeta" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><input type="text" placeholder="MM/AA" required></div>
+                    <div class="form-group"><input type="text" placeholder="CVV" required></div>
+                </div>
+                <p style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">🔒 Pago seguro - Tus datos están protegidos.</p>
+                <div class="btn-container">
+                    <button type="button" class="btn-secondary" onclick="prevStep(2)">← Volver</button>
+                    <button type="button" class="btn-primary" onclick="prepareSummary(); nextStep(4);">Revisar compra →</button>
+                </div>
+            </div>
+
+            <div class="step-content" id="step-4">
+                <h2>RESUMEN DE COMPRA</h2>
+                <div class="card" style="flex-direction: column; align-items: stretch;">
+                    
+                    <div id="summary-items-container"></div>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 20px; margin-top: 15px;">
+                        <strong>TOTAL A PAGAR</strong>
+                        <strong style="color: var(--fuchsia-fuzz);" id="final-total">$0</strong>
+                    </div>
+                </div>
+                <p style="font-size: 12px; text-align: center; color: #666; margin-bottom: 20px;">
+                    Al pagar, aceptás los términos y condiciones. Todo lo recaudado es a beneficio de la ONG Animales en Adopción Zárate.
+                </p>
+                <div class="btn-container">
+                    <button type="button" class="btn-secondary" onclick="prevStep(3)">← Volver</button>
+                    <button type="submit" class="btn-primary" style="background-color: var(--purple-haze);">Confirmar y Pagar</button>
+                </div>
+            </div>
+
+            <div class="step-content success-message" id="step-5">
+                <h2>¡ROCK Y SOLIDARIDAD! 🤘🐾</h2>
+                <p>¡Gracias por tu compra y por sumarte a esta causa!</p>
+                <p>Tus entradas digitales han sido enviadas a: <br><strong id="displayEmail" style="color: var(--rock-violet);">tu_correo@email.com</strong></p>
+                <p style="margin-top: 20px; font-weight: bold; background: rgba(140, 81, 183, 0.1); padding: 15px; border-radius: 8px;">
+                    Con tu entrada estás ayudando directamente a rescatar, rehabilitar y buscar familias responsables para los animalitos de Zárate. ¡Nos vemos en el pogo!
+                </p>
+                <div class="btn-container" style="justify-content: center;">
+                    <button type="button" class="btn-primary" onclick="location.reload()">Volver al inicio</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-' + step).classList.add('active');
+            
+            for(let i=1; i<=4; i++) {
+                if(i <= step) {
+                    document.getElementById('ind-' + i).classList.add('active');
+                } else {
+                    document.getElementById('ind-' + i).classList.remove('active');
+                }
+            }
+        }
+
+        function prevStep(step) {
+            nextStep(step);
+        }
+
+        // Calculadora dinámica del resumen
+        function prepareSummary() {
+            const qtyGen = parseInt(document.getElementById('qty-general').value) || 0;
+            const qtyVip = parseInt(document.getElementById('qty-vip').value) || 0;
+            const qtyFam = parseInt(document.getElementById('qty-familiar').value) || 0;
+
+            const priceGen = 35000;
+            const priceVip = 60000;
+            const priceFam = 100000;
+
+            let total = (qtyGen * priceGen) + (qtyVip * priceVip) + (qtyFam * priceFam);
+            let summaryHTML = '';
+
+            if (qtyGen > 0) {
+                summaryHTML += `<div class="summary-item"><span>${qtyGen} x Pase General</span><strong>$${(qtyGen * priceGen).toLocaleString('es-AR')}</strong></div>`;
+            }
+            if (qtyVip > 0) {
+                summaryHTML += `<div class="summary-item"><span>${qtyVip} x Pata VIP</span><strong>$${(qtyVip * priceVip).toLocaleString('es-AR')}</strong></div>`;
+            }
+            if (qtyFam > 0) {
+                summaryHTML += `<div class="summary-item"><span>${qtyFam} x Pack Familiar</span><strong>$${(qtyFam * priceFam).toLocaleString('es-AR')}</strong></div>`;
+            }
+
+            if (summaryHTML === '') {
+                summaryHTML = `<div class="summary-item"><span>No seleccionaste entradas</span><strong>$0</strong></div>`;
+            }
+
+            document.getElementById('summary-items-container').innerHTML = summaryHTML;
+            document.getElementById('final-total').innerText = '$' + total.toLocaleString('es-AR');
+        }
+
+        document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            
+            let userEmail = document.getElementById('userEmail').value;
+            if(userEmail === '') userEmail = 'tu_correo@email.com';
+            document.getElementById('displayEmail').innerText = userEmail;
+
+            document.getElementById('progressHeader').style.display = 'none';
+            document.querySelectorAll('.step-content').forEach(el => el.classList.remove('active'));
+            document.getElementById('step-5').classList.add('active');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ONG Rescate - El PataRock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir);
+            color: var(--vintage-bone);
+            background-image: radial-gradient(circle at top left, var(--purple-haze), var(--grunge-noir));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+        /* Navbar */
+        header {
+            background-color: var(--grunge-noir);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze);
+        }
+        
+        .logo-nav { 
+            height: 45px; 
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3));
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 55px;
+            color: var(--fuchsia-fuzz);
+            text-transform: uppercase;
+            text-shadow: 0 0 20px rgba(216, 26, 133, 0.4);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .text-section p {
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #ddd;
+        }
+
+        .highlight-box {
+            background-color: rgba(140, 81, 183, 0.15);
+            border-left: 5px solid var(--fuchsia-fuzz);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 30px 0;
+        }
+
+        .highlight-box h3 {
+            color: var(--vintage-bone);
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+        }
+
+        .image-collage {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .img-placeholder {
+            background-color: var(--purple-haze);
+            border-radius: 12px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: bold;
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            background-size: cover;
+            background-position: center;
+        }
+
+        .img-1 { background-image: url('img/ong-perros.jpg'); } 
+        .img-2 { background-image: url('img/ong-gatos.jpg'); }
+        .img-3 { grid-column: span 2; height: 150px; background-image: url('img/ong-equipo-voluntarios.jpg'); }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--fuchsia-fuzz);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            border-radius: 6px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #b5156f;
+        }
+
+        .btn-external {
+            display: inline-block;
+            background-color: transparent;
+            color: var(--vintage-bone);
+            border: 2px solid var(--vintage-bone);
+            text-decoration: none;
+            padding: 13px 38px;
+            font-family: 'Inter', sans-serif;
+            font-weight: bold;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-external:hover {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 30px;
+            color: var(--vintage-bone);
+            margin-top: 50px;
+        }
+        footer .socials { margin-bottom: 15px; }
+        footer .socials span { 
+            display: inline-block; width: 30px; height: 30px; 
+            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
+        }
+        footer p { font-weight: 600; line-height: 1.5; }
+
+        @media (max-width: 900px) {
+            .content-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="anton-font">ANIMALES EN ADOPCIÓN ZÁRATE</h1>
+            <p>Conocé a la organización detrás de la causa que nos mueve.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="text-section">
+                <p>Somos un grupo de voluntarios de Zárate unidos por el amor a los animales. Nuestra misión es cambiar la realidad de aquellos que han sufrido el abandono o maltrato, dándoles una segunda oportunidad.</p>
+                
+                <div class="highlight-box">
+                    <h3>¿Cómo trabajamos?</h3>
+                    <p style="margin-bottom: 0; font-size: 16px;">Contamos con un pequeño refugio especialmente dedicado a los perros. Por otro lado, los cachorros, gatos y gatitos rescatados son cuidados con muchísimo amor en casas de tránsito hasta que encuentran a su familia definitiva.</p>
+                </div>
+
+                <p>Creemos profundamente en la educación y la concientización. Por eso, participamos en eventos locales promoviendo las castraciones, la salud animal y la tenencia responsable.</p>
+            </div>
+
+            <div class="image-collage">
+                <div class="img-placeholder img-1">Foto Refugio</div>
+                <div class="img-placeholder img-2">Foto Tránsito</div>
+                <div class="img-placeholder img-3">Foto Equipo / Eventos</div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="anton-font" style="font-size: 36px; color: var(--rock-violet);">EL 100% DE LA RECAUDACIÓN DEL FESTIVAL ES PARA ELLOS</h2>
+            <p style="font-size: 18px; color: #ccc; margin-top: 10px;">Ayudanos a seguir rescatando, rehabilitando y buscando familias responsables.</p>
+            
+            <div class="btn-group">
+                <a href="tickets.html" class="btn-primary">COMPRAR TICKET SOLIDARIO</a>
+                <a href="https://animalesenadopcionzarate.my.canva.site" target="_blank" class="btn-external">VER SITIO REAL DE LA ONG 🐾</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+    </footer>
+
+</body>
+</html>

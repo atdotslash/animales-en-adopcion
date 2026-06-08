@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ubicación y FAQ - El PataRock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir);
+            color: var(--vintage-bone);
+            background-image: radial-gradient(circle at top right, var(--purple-haze), var(--grunge-noir));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+		/* Navbar */
+        header {
+            background-color: var(--grunge-noir); /* Fondo oscuro para resaltar el logo */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze); /* Línea sutil para separar */
+        }
+        
+        .logo-nav { 
+            height: 45px; /* Un poco más grande para que se lea bien el estilo grunge */
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3)); /* Brillo fucsia sutil */
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-header h1 {
+            font-size: 50px;
+            color: var(--fuchsia-fuzz);
+            text-transform: uppercase;
+        }
+
+        .page-header p {
+            font-size: 18px;
+            color: #ccc;
+            margin-top: 10px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* Location Section */
+        .location-card {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-top: 8px solid var(--rock-violet);
+        }
+
+        .location-card h2 {
+            font-size: 32px;
+            color: var(--purple-haze);
+            margin-bottom: 20px;
+        }
+
+        .address-info {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .address-info span {
+            color: var(--fuchsia-fuzz);
+        }
+
+        .map-placeholder {
+            width: 100%;
+            height: 300px;
+            background: url('img/mapa-zarate-grande.jpg') center/cover; /* Reemplazar con recorte de mapa interactivo */
+            background-color: #ddd;
+            border-radius: 8px;
+            border: 2px solid var(--purple-haze);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--grunge-noir);
+            font-weight: bold;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .faq-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .faq-card:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .faq-card h3 {
+            font-size: 22px;
+            color: var(--vintage-bone);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-card h3::before {
+            content: "🐾";
+        }
+
+        .faq-card p {
+            font-size: 16px;
+            color: #ddd;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 30px;
+            color: var(--vintage-bone);
+            margin-top: 50px;
+        }
+        footer .socials { margin-bottom: 15px; }
+        footer .socials span { 
+            display: inline-block; width: 30px; height: 30px; 
+            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
+        }
+        footer p { font-weight: 600; line-height: 1.5; }
+
+        @media (max-width: 900px) {
+            .grid-container { grid-template-columns: 1fr; }
+            header { flex-direction: column; gap: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+	<header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="page-header">
+            <h1 class="anton-font">¿DÓNDE ES EL POGO?</h1>
+            <p>Toda la info para que llegues sin problemas y disfrutes del festival solidario.</p>
+        </div>
+
+        <div class="grid-container">
+            <div class="location-card">
+                <h2>CÓMO LLEGAR</h2>
+                <div class="address-info">
+                    <strong>Anfiteatro Homero Expósito</strong><br>
+                    San Martín 699-799<br>
+                    <span>Zárate, Provincia de Buenos Aires</span>
+                </div>
+                <div class="map-placeholder">
+                    </div>
+                <div style="margin-top: 20px; text-align: center;">
+                    <a href="https://maps.google.com/?cid=17177064542090801739&g_mp=Cidnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLlNlYXJjaFRleHQ" target="_blank" style="color: var(--fuchsia-fuzz); text-decoration: none; font-weight: bold; display: inline-block;">📍 Ver indicaciones en Google Maps</a>
+                </div>
+            </div>
+
+            <div class="faq-section">
+                <div class="faq-card">
+                    <h3>¿A qué hora abren las puertas?</h3>
+                    <p>Las puertas del Anfiteatro abrirán a las 16:00 hs. El primer show arranca puntual a las 17:00 hs. ¡Vení temprano para agarrar un buen lugar!</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>¿Qué tengo que llevar como entrada?</h3>
+                    <p>Tu entrada digital (la que te llegó por correo al pagar) y/o tu donación de alimento para mascotas si elegiste el bono contribución. Todo es a beneficio de Animales en Adopción Zárate.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>¿Se puede llevar comida o bebida?</h3>
+                    <p>No se permite el ingreso con alimentos o bebidas. Vas a encontrar un patio gastronómico y food trucks adentro del predio, y todo lo recaudado ayuda a la ONG.</p>
+                </div>
+
+                <div class="faq-card">
+                    <h3>¿Puedo ir con mi mascota?</h3>
+                    <p>Aunque los amamos y este festival es para ellos, por cuestiones de sonido (que puede dañar sus oídos) y seguridad frente a la multitud, te pedimos que los dejes descansando en casa.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+    </footer>
+
+</body>
+</html>

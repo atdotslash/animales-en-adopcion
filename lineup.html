@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line-Up - El PataRock</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir);
+            color: var(--vintage-bone);
+            background-image: radial-gradient(circle at center, var(--purple-haze), var(--grunge-noir));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+/* Navbar */
+        header {
+            background-color: var(--grunge-noir); /* Fondo oscuro para resaltar el logo */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze); /* Línea sutil para separar */
+        }
+        
+        .logo-nav { 
+            height: 45px; /* Un poco más grande para que se lea bien el estilo grunge */
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3)); /* Brillo fucsia sutil */
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Lineup Content */
+        main {
+            flex: 1;
+            padding: 60px 20px;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .page-title {
+            font-size: 50px;
+            color: var(--vintage-bone);
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .festival-date {
+            font-family: 'Anton', sans-serif;
+            font-size: 32px;
+            color: var(--fuchsia-fuzz);
+            margin-bottom: 50px;
+            letter-spacing: 2px;
+        }
+
+        .lineup-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .headliner {
+            font-family: 'Anton', sans-serif;
+            font-size: 70px;
+            line-height: 1.1;
+            color: var(--vintage-bone);
+            text-transform: uppercase;
+            text-shadow: 0 0 15px var(--fuchsia-fuzz);
+            margin-bottom: 20px;
+        }
+
+        .support-bands {
+            font-family: 'Anton', sans-serif;
+            font-size: 45px;
+            color: var(--rock-violet);
+            line-height: 1.3;
+        }
+
+        .support-bands span {
+            display: block;
+            margin-bottom: 15px;
+            transition: color 0.3s;
+        }
+
+        .support-bands span:hover {
+            color: var(--fuchsia-fuzz);
+        }
+
+        .cta-container {
+            margin-top: 60px;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background-color: var(--fuchsia-fuzz);
+            color: white;
+            text-decoration: none;
+            padding: 15px 40px;
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            border-radius: 6px;
+            transition: transform 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            background-color: #b5156f;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #111;
+            text-align: center;
+            padding: 30px;
+            color: var(--vintage-bone);
+            margin-top: auto;
+        }
+        footer .socials { margin-bottom: 15px; }
+        footer .socials span { 
+            display: inline-block; width: 30px; height: 30px; 
+            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
+        }
+        footer p { font-weight: 600; line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .headliner { font-size: 45px; }
+            .support-bands { font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+	<header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1 class="page-title anton-font">EL ROCK, SIEMPRE EL ROCK</h1>
+        <div class="festival-date">SÁBADO 27 DE JUNIO • 17:00 HS</div>
+
+        <div class="lineup-grid">
+            <div class="headliner">
+                LOS RATONES PARANOICOS
+            </div>
+            
+            <div class="support-bands">
+                <span>DON GATO Y SU PANDILLA</span>
+                <span>LOS RENOS DE SANTA</span>
+                <span>DULCE TOLÓN TOLÓN</span>
+            </div>
+        </div>
+
+        <div class="cta-container">
+            <a href="tickets.html" class="btn-primary">CONSEGUÍ TU ENTRADA</a>
+        </div>
+    </main>
+
+    <footer>
+        <div class="socials">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+    </footer>
+
+</body>
+</html>

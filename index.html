@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El PataRock - Festival Solidario en Zárate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--purple-haze);
+            color: var(--vintage-bone);
+            background-image: radial-gradient(circle at center, #3d145e, var(--purple-haze));
+        }
+
+        h1, h2, h3, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+		/* Navbar */
+        header {
+            background-color: var(--grunge-noir); /* Fondo oscuro para resaltar el logo */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze); /* Línea sutil para separar */
+        }
+        
+        .logo-nav { 
+            height: 45px; /* Un poco más grande para que se lea bien el estilo grunge */
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3)); /* Brillo fucsia sutil */
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 400px;
+            background: url('img/hero-bandas-placeholder.jpg') center/cover; /* Reemplazar con el collage de bandas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-logo { width: 60%; max-width: 600px; z-index: 2; }
+
+        /* Tickets Cards */
+        .tickets-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .ticket-card {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            width: 250px;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .ticket-card img { height: 80px; margin-bottom: 15px; } /* Reemplazar con íconos de perros */
+        
+        .ticket-card h3 { font-size: 24px; margin-bottom: 20px; color: var(--grunge-noir); font-family: 'Inter', sans-serif; font-weight: 600;}
+
+        .btn-comprar {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--fuchsia-fuzz);
+            font-family: 'Anton', sans-serif;
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-comprar:hover { transform: scale(1.05); }
+
+        /* Banner Medio */
+        .middle-banner {
+            background: url('img/crowd-placeholder.jpg') center/cover; /* Reemplazar con foto del público */
+            text-align: center;
+            padding: 80px 20px 40px;
+            position: relative;
+        }
+
+        .middle-banner-text {
+            background-color: var(--grunge-noir);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .middle-banner h2 { font-size: 36px; color: var(--vintage-bone); }
+        .middle-banner p { font-size: 18px; margin-top: 5px; }
+
+		/* Nuevo estilo para el botón externo */
+		.btn-externo {
+			display: inline-block;
+			padding: 12px 24px;
+			background-color: transparent;
+			color: var(--fuchsia-fuzz);
+			border: 2px solid var(--fuchsia-fuzz);
+			border-radius: 6px;
+			font-family: 'Inter', sans-serif;
+			font-weight: bold;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.btn-externo:hover {
+			background-color: var(--fuchsia-fuzz);
+			color: white;
+			transform: translateY(-3px);
+		}
+
+
+        /* Info ONG y Mapa */
+        .info-section {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            padding: 40px;
+            display: flex;
+            gap: 30px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .info-img { width: 30%; border-radius: 10px; border: 4px solid var(--fuchsia-fuzz); } /* Reemplazar con foto ONG */
+        
+        .info-list { width: 35%; list-style: none; font-weight: 600; }
+        .info-list li { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
+        .icon-circle { background-color: var(--fuchsia-fuzz); width: 40px; height: 40px; border-radius: 50%; display: inline-block; }
+
+        .map-img { width: 30%; border-radius: 10px; } /* Reemplazar con imagen del mapa */
+
+        /* Auspician */
+        .sponsors {
+            background-color: var(--purple-haze);
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .sponsors h3 { font-size: 28px; margin-bottom: 20px; }
+        .sponsors-bar {
+            background-color: var(--vintage-bone);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            color: var(--grunge-noir);
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            text-align: center;
+            padding: 30px;
+            color: var(--vintage-bone);
+        }
+        footer .socials { margin-bottom: 15px; }
+        footer .socials span { 
+            display: inline-block; width: 30px; height: 30px; 
+            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
+        }
+        footer p { font-weight: 600; line-height: 1.5; }
+
+        @media (max-width: 768px) {
+            header, .info-section { flex-direction: column; text-align: center; gap: 20px; }
+            .info-img, .info-list, .map-img { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+ <header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="img/logo-patarock-grande.png" alt="El PataRock" class="hero-logo">
+    </section>
+
+    <section class="tickets-section">
+        <div class="ticket-card">
+            <img src="img/icon-dog-1.png" alt="General">
+            <h3>GENERAL</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+        <div class="ticket-card">
+            <img src="img/icon-dog-2.png" alt="Pata VIP">
+            <h3>PATA VIP</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+        <div class="ticket-card">
+            <img src="img/icon-dog-3.png" alt="Familiar">
+            <h3>FAMILIAR</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+    </section>
+
+    <section class="middle-banner">
+        <div class="middle-banner-text">
+            <h2>EL FESTIVAL QUE MUEVE EL ROCK Y SALVA VIDAS.</h2>
+            <p>SÁBADO 28 DE MARZO, ZÁRATE. MÚSICA SOLIDARIA.</p>
+        </div>
+    </section>
+
+    <section class="info-section">
+        <img src="img/ong-equipo.jpg" alt="Equipo ONG" class="info-img">
+        <ul class="info-list">
+            <li><span class="icon-circle"></span> 100% DE LA RECAUDACIÓN PARA ALIMENTO MASCOTA</li>
+            <li><span class="icon-circle"></span> APOYO DIRECTO A ONG ANIMALES EN ADOPCIÓN ZÁRATE</li>
+            <li><span class="icon-circle"></span> ZÁRATE, BUENOS AIRES - UBICACIÓN EXACTA</li>
+        </ul>
+        <img src="img/mapa-zarate.jpg" alt="Mapa Zárate" class="map-img">
+    </section>
+	<div style="text-align: center; margin-top: 20px;">
+    <a href="https://animalesenadopcionzarate.my.canva.site" target="_blank" class="btn-externo">
+        Visitar Sitio Oficial de la ONG Zárate 🐾
+    </a>
+	</div>
+    <section class="sponsors">
+        <h3>Auspician</h3>
+        <div class="sponsors-bar">
+            <span>Belardita</span>
+            <span>Berón</span>
+            <span>Leiva</span>
+            <span>Ortega</span>
+            <span>Sandoval</span>
+        </div>
+    </section>
+
+    <footer>
+        <div class="socials">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+    </footer>
+
+</body>
+</html>

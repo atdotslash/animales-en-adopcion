@@ -1,6 +1,6 @@
 # El PataRock - Festival Solidario 🤘🐾
 
-¡Bienvenido al repositorio oficial de **El PataRock**! Este es un proyecto web desarrollado de forma integral para la materia **Diseño Gráfico**. Se trata de una plataforma responsive para un festival de música solidario ficticio, cuyo objetivo principal es la difusión y recaudación de fondos (100% de lo recaudado) para la ONG **Animales en Adopción Zárate**.
+¡Bienvenido al repositorio oficial de **El PataRock**! Este es un proyecto web desarrollado de forma integral para la materia **DISEÑO GRÁFICO**, correspondiente al **segundo año de la carrera Técnico Universitario en Desarrollo Web**. Se trata de una plataforma responsive para un festival de música solidario ficticio, cuyo objetivo principal es la difusión y recaudación de fondos (100% de lo recaudado) para la ONG **Animales en Adopción Zárate**.
 
 El sitio ya se encuentra desplegado y es completamente funcional a través de **GitHub Pages**.
 
@@ -27,7 +27,7 @@ El sitio web está compuesto por 5 páginas principales y un flujo de checkout c
 ## 🛠️ Tecnologías Utilizadas
 
 * **HTML5:** Estructuración semántica de cada una de las secciones.
-* **CSS3:** Estilos personalizados, variables de entorno para la paleta de colores, maquetación adaptiva (Grid/Flexbox) y efectos de transición (`hover`).
+* **CSS3:** Estilos personalizados, variables de entorno para la paleta de colores, maquetación adaptativa (Grid/Flexbox) y efectos de transición (`hover`).
 * **JavaScript (Vanilla JS):** Lógica detrás de la calculadora de tickets, flujo de pantallas del formulario y dinamismo del menú responsive.
 
 ---
@@ -36,16 +36,17 @@ El sitio web está compuesto por 5 páginas principales y un flujo de checkout c
 
 Este proyecto fue realizado por:
 
-* **Horacio Belardita**
-* **Tomás Berón**
-* **Enzo Leiva**
-* **Sergio Ortega**
-* **Edgardo Sandoval**
+1. **Horacio Belardita**
+2. **Tomás Berón**
+3. **Enzo Leiva**
+4. **Sergio Ortega**
+5. **Edgardo Sandoval**
 
 ---
 
 ## 📄 Enlaces Útiles e Integraciones Reales
+
 El proyecto no solo funciona como maqueta, sino que enlaza de manera directa con canales oficiales de ayuda económica y difusión:
 * Enlace de suscripción mensual/donaciones vía **Mercado Pago**.
 * Redirección al **Canva Site Oficial** de la ONG Animales en Adopción Zárate.
-* Canales directos de contacto (WhatsApp e Instagram).
+* Canales directos de contacto (WhatsApp e Instagram Oficial / Feria Mestizo).

@@ -18,14 +18,18 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body {
+		body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--purple-haze);
+            background-color: var(--grunge-noir); /* Color de respaldo */
+            background-image: url('img/fondo.jpg');
+            background-size: cover; /* Cubre toda la pantalla */
+            background-position: center top;
+            background-attachment: fixed; /* Efecto dinámico al scrollear */
             color: var(--vintage-bone);
-            background-image: radial-gradient(circle at center, #3d145e, var(--purple-haze));
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-
-        h1, h2, h3, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
 
 		/* Navbar */
         header {
@@ -130,25 +134,136 @@
 		}
 
 
-        /* Info ONG y Mapa */
+		/* Info ONG y Mapa */
         .info-section {
             background-color: var(--vintage-bone);
             color: var(--grunge-noir);
-            padding: 40px;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+            grid-auto-rows: auto;
+            gap: 40px; /* Separación pareja entre todos los elementos */
+            align-items: start; /* Clave: alinea todo desde arriba, no al medio */
         }
 
-        .info-img { width: 30%; border-radius: 10px; border: 4px solid var(--fuchsia-fuzz); } /* Reemplazar con foto ONG */
-        
-        .info-list { width: 35%; list-style: none; font-weight: 600; }
-        .info-list li { margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-        .icon-circle { background-color: var(--fuchsia-fuzz); width: 40px; height: 40px; border-radius: 50%; display: inline-block; }
+        /* Imágenes dinámicas */
+        .dynamic-img {
+            width: 100%;
+            height: 100%;
+            max-height: 280px; /* Limita la altura máxima */
+            object-fit: cover; /* Recorta la imagen limpiamente si sobra espacio, sin dejar huecos */
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
 
-        .map-img { width: 30%; border-radius: 10px; } /* Reemplazar con imagen del mapa */
+        .dynamic-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(216, 26, 133, 0.3);
+        }
+
+        .info-img {
+            border: 4px solid var(--fuchsia-fuzz);
+        }
+
+        .map-img {
+            border: 4px solid var(--rock-violet);
+        }
+
+        .info-list { 
+            list-style: none; 
+            font-weight: 600; 
+            font-size: 16px; /* Un poco más sutil */
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-top: 10px; /* Alineación óptica con el borde de la foto */
+        }
+
+        .info-list li { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .icon-circle { 
+            background-color: var(--fuchsia-fuzz); 
+            min-width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(216, 26, 133, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .info-section { 
+                grid-template-columns: 1fr; /* Una columna en celulares */
+                padding: 40px 20px; 
+            }
+        }
+
+        /* Efecto dinámico de Zoom suave */
+        .dynamic-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .dynamic-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(216, 26, 133, 0.3); /* Sombra fucsia */
+        }
+
+        .info-img { border: 4px solid var(--fuchsia-fuzz); }
+
+        .info-list { 
+            list-style: none; 
+            font-weight: 600; 
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-list li { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-list li:hover {
+            transform: translateX(10px); /* Pequeño desplazamiento al pasar el mouse */
+        }
+
+        .icon-circle { 
+            background-color: var(--fuchsia-fuzz); 
+            min-width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(216, 26, 133, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .info-section { grid-template-columns: 1fr; padding: 40px 20px; }
+        }
 
         /* Auspician */
         .sponsors {
@@ -171,24 +286,81 @@
             font-style: italic;
         }
 
-        /* Footer */
+		/* Footer Funcional */
         footer {
-            background-color: #333;
+            background-color: rgba(17, 17, 17, 0.95);
+            padding: 40px 20px 20px;
+            color: var(--vintage-bone);
+            margin-top: auto;
+            border-top: 4px solid var(--purple-haze);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 30px;
             text-align: center;
-            padding: 30px;
+        }
+
+        .footer-col h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            color: var(--fuchsia-fuzz);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
             color: var(--vintage-bone);
         }
-        footer .socials { margin-bottom: 15px; }
-        footer .socials span { 
-            display: inline-block; width: 30px; height: 30px; 
-            background-color: var(--fuchsia-fuzz); border-radius: 50%; margin: 0 5px; 
-        }
-        footer p { font-weight: 600; line-height: 1.5; }
 
-        @media (max-width: 768px) {
-            header, .info-section { flex-direction: column; text-align: center; gap: 20px; }
-            .info-img, .info-list, .map-img { width: 100%; }
+        .btn-donar {
+            display: inline-block;
+            background-color: #009EE3; /* Color MercadoPago */
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            border-radius: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
         }
+
+        .btn-donar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 158, 227, 0.4);
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
     </style>
 </head>
 <body>
@@ -235,20 +407,27 @@
         </div>
     </section>
 
-    <section class="info-section">
-        <img src="img/ong-equipo.jpg" alt="Equipo ONG" class="info-img">
+	<section class="info-section">
+        <img src="img/ong-equipo.jpg" alt="Equipo ONG" class="dynamic-img info-img">
+        
         <ul class="info-list">
-            <li><span class="icon-circle"></span> 100% DE LA RECAUDACIÓN PARA ALIMENTO MASCOTA</li>
-            <li><span class="icon-circle"></span> APOYO DIRECTO A ONG ANIMALES EN ADOPCIÓN ZÁRATE</li>
-            <li><span class="icon-circle"></span> ZÁRATE, BUENOS AIRES - UBICACIÓN EXACTA</li>
+            <li><span class="icon-circle">🐾</span> 100% DE LA RECAUDACIÓN PARA LAS MASCOTAS</li>
+            <li><span class="icon-circle">💛</span> APOYO DIRECTO A ONG ANIMALES EN ADOPCIÓN ZÁRATE</li>
+            <li><span class="icon-circle">📍</span> ANFITEATRO HOMERO EXPÓSITO, ZÁRATE, BS. AS.</li>
         </ul>
-        <img src="img/mapa-zarate.jpg" alt="Mapa Zárate" class="map-img">
+
+        <img src="img/mapa-zarate.jpg" alt="Mapa Zárate" class="dynamic-img map-img">
+
+        <ul class="info-list">
+            <li><span class="icon-circle">🐈</span> LLEGÁ CAMINANDO</li>
+            <li><span class="icon-circle">🐩</span> LLEGÁ CORRIENDO</li>
+            <li><span class="icon-circle">🐶</span> LLEGÁ ACOMPAÑADA/O</li>
+        </ul>
+
+
+        <div></div>
     </section>
-	<div style="text-align: center; margin-top: 20px;">
-    <a href="https://animalesenadopcionzarate.my.canva.site" target="_blank" class="btn-externo">
-        Visitar Sitio Oficial de la ONG Zárate 🐾
-    </a>
-	</div>
+
     <section class="sponsors">
         <h3>Auspician</h3>
         <div class="sponsors-bar">
@@ -260,11 +439,36 @@
         </div>
     </section>
 
-    <footer>
-        <div class="socials">
-            <span></span><span></span><span></span><span></span>
+	<footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CONTACTO AEA</h4>
+                <div class="footer-links">
+                    <a href="https://animalesenadopcionzarate.my.canva.site/" target="_blank">🌐 Sitio Web Oficial</a>
+                    <a href="https://wa.me/5493487543101" target="_blank">💬 WhatsApp (+54 9 3487 543101)</a>
+                    <a href="mailto:aeazarate@outlook.com">✉️ aeazarate@outlook.com</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>REDES SOCIALES</h4>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/animalesenadopcionzarate/" target="_blank">📷 Instagram Oficial</a>
+                    <a href="https://www.instagram.com/mestizo_byaea/" target="_blank">🛍️ Feria Mestizo</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>SUMATE COMO PADRINO</h4>
+                <p style="font-size: 14px; color: #ccc; margin-bottom: 10px;">Tu aporte mensual salva vidas.</p>
+                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847fadfa3d017fb97269a40209" target="_blank" class="btn-donar">
+                    🤝 DONAR POR MERCADOPAGO
+                </a>
+            </div>
         </div>
-        <p>AEAZARATE@OUTLOOK.COM<br>+54 9 3487 54 31 01</p>
+        <div class="footer-bottom">
+            <p>&copy; 2026 El PataRock Festival Solidario - A beneficio de Animales en Adopción Zárate.</p>
+        </div>
     </footer>
 
 </body>

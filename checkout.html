@@ -29,9 +29,37 @@
             color: var(--grunge-noir);
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, .anton-font { font-family: 'Anton', sans-serif; letter-spacing: 1px; }
+
+        /* Navbar */
+        header {
+            background-color: var(--grunge-noir);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze);
+        }
+        
+        .logo-nav { 
+            height: 45px; 
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3));
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+        /* Main Container for Checkout */
+        main {
+            flex: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
         .checkout-container {
@@ -94,13 +122,11 @@
             display: block;
         }
 
-        h2 {
-            font-family: 'Anton', sans-serif;
+        h2.step-title {
             font-size: 32px;
             text-align: center;
             margin-bottom: 30px;
             color: var(--purple-haze);
-            letter-spacing: 1px;
         }
 
         /* Utilidad para el resumen */
@@ -190,133 +216,244 @@
 
         /* Success Message */
         .success-message { text-align: center; }
-        .success-message h2 { color: var(--fuchsia-fuzz); font-size: 40px; display: block; }
+        .success-message h2.step-title { color: var(--fuchsia-fuzz); font-size: 40px; display: block; }
         .success-message p { font-size: 18px; line-height: 1.6; margin-bottom: 20px; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+		/* Footer Funcional */
+        footer {
+            background-color: rgba(17, 17, 17, 0.95);
+            padding: 40px 20px 20px;
+            color: var(--vintage-bone);
+            margin-top: auto;
+            border-top: 4px solid var(--purple-haze);
         }
 
-        @media (max-width: 600px) {
-            .step-indicator span:not(.step-num) { display: none; }
-            .form-row { flex-direction: column; gap: 0; }
-            .step-content { padding: 20px; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        .footer-col h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            color: var(--fuchsia-fuzz);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--vintage-bone);
+        }
+
+        .btn-donar {
+            display: inline-block;
+            background-color: #009EE3; /* Color MercadoPago */
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            border-radius: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-donar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 158, 227, 0.4);
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #888;
         }
     </style>
 </head>
 <body>
 
-    <div class="checkout-container">
-        <div class="progress-header" id="progressHeader">
-            <div class="step-indicator active" id="ind-1"><div class="step-num">1</div><span>ENTRADAS</span></div>
-            <div class="step-indicator" id="ind-2"><div class="step-num">2</div><span>DATOS</span></div>
-            <div class="step-indicator" id="ind-3"><div class="step-num">3</div><span>PAGO</span></div>
-            <div class="step-indicator" id="ind-4"><div class="step-num">4</div><span>RESUMEN</span></div>
+    <header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <nav>
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="checkout-container">
+            <div class="progress-header" id="progressHeader">
+                <div class="step-indicator active" id="ind-1"><div class="step-num">1</div><span>ENTRADAS</span></div>
+                <div class="step-indicator" id="ind-2"><div class="step-num">2</div><span>DATOS</span></div>
+                <div class="step-indicator" id="ind-3"><div class="step-num">3</div><span>PAGO</span></div>
+                <div class="step-indicator" id="ind-4"><div class="step-num">4</div><span>RESUMEN</span></div>
+            </div>
+
+            <form id="checkoutForm">
+                <div class="step-content active" id="step-1">
+                    <h2 class="step-title anton-font">SELECCIÓN DE ENTRADAS</h2>
+                    <div class="card">
+                        <div>
+                            <h3>PASE GENERAL - 2 DÍAS</h3>
+                            <p style="font-size:14px; color:#666;">Acceso completo al campo durante los 2 días.</p>
+                            <div class="price">$35.000</div>
+                        </div>
+                        <div><input type="number" id="qty-general" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>PATA VIP - EXPERIENCIA</h3>
+                            <p style="font-size:14px; color:#666;">Zona exclusiva, meet & greet y food trucks.</p>
+                            <div class="price">$60.000</div>
+                        </div>
+                        <div><input type="number" id="qty-vip" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <h3>PACK FAMILIAR</h3>
+                            <p style="font-size:14px; color:#666;">4 Entradas Generales + Zona familiar.</p>
+                            <div class="price">$100.000</div>
+                        </div>
+                        <div><input type="number" id="qty-familiar" value="0" min="0" style="width: 70px; text-align:center;"></div>
+                    </div>
+                    <div class="btn-container">
+                        <button type="button" class="btn-primary" onclick="nextStep(2)">Continuar a mis datos →</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-2">
+                    <h2 class="step-title anton-font">DATOS DEL COMPRADOR</h2>
+                    <div class="form-group">
+                        <input type="text" placeholder="Nombre completo" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" placeholder="DNI" required></div>
+                        <div class="form-group"><input type="text" placeholder="Teléfono" required></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="userEmail" placeholder="Email" required>
+                    </div>
+                    <div class="btn-container">
+                        <button type="button" class="btn-secondary" onclick="prevStep(1)">← Volver</button>
+                        <button type="button" class="btn-primary" onclick="nextStep(3)">Continuar al pago →</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-3">
+                    <h2 class="step-title anton-font">DETALLES DE PAGO</h2>
+                    <div class="form-group">
+                        <input type="text" placeholder="Número de tarjeta (Ej: 4500 1234 ...)" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Nombre como figura en la tarjeta" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><input type="text" placeholder="MM/AA" required></div>
+                        <div class="form-group"><input type="text" placeholder="CVV" required></div>
+                    </div>
+                    <p style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">🔒 Pago seguro - Tus datos están protegidos.</p>
+                    <div class="btn-container">
+                        <button type="button" class="btn-secondary" onclick="prevStep(2)">← Volver</button>
+                        <button type="button" class="btn-primary" onclick="prepareSummary(); nextStep(4);">Revisar compra →</button>
+                    </div>
+                </div>
+
+                <div class="step-content" id="step-4">
+                    <h2 class="step-title anton-font">RESUMEN DE COMPRA</h2>
+                    <div class="card" style="flex-direction: column; align-items: stretch;">
+                        
+                        <div id="summary-items-container"></div>
+                        
+                        <div style="display: flex; justify-content: space-between; font-size: 20px; margin-top: 15px;">
+                            <strong>TOTAL A PAGAR</strong>
+                            <strong style="color: var(--fuchsia-fuzz);" id="final-total">$0</strong>
+                        </div>
+                    </div>
+                    <p style="font-size: 12px; text-align: center; color: #666; margin-bottom: 20px;">
+                        Al pagar, aceptás los términos y condiciones. Todo lo recaudado es a beneficio de la ONG Animales en Adopción Zárate.
+                    </p>
+                    <div class="btn-container">
+                        <button type="button" class="btn-secondary" onclick="prevStep(3)">← Volver</button>
+                        <button type="submit" class="btn-primary" style="background-color: var(--purple-haze);">Confirmar y Pagar</button>
+                    </div>
+                </div>
+
+                <div class="step-content success-message" id="step-5">
+                    <h2 class="step-title anton-font">¡ROCK Y SOLIDARIDAD! 🤘🐾</h2>
+                    <p>¡Gracias por tu compra y por sumarte a esta causa!</p>
+                    <p>Tus entradas digitales han sido enviadas a: <br><strong id="displayEmail" style="color: var(--rock-violet);">tu_correo@email.com</strong></p>
+                    <p style="margin-top: 20px; font-weight: bold; background: rgba(140, 81, 183, 0.1); padding: 15px; border-radius: 8px;">
+                        Con tu entrada estás ayudando directamente a rescatar, rehabilitar y buscar familias responsables para los animalitos de Zárate. ¡Nos vemos en el pogo!
+                    </p>
+                    <div class="btn-container" style="justify-content: center;">
+                        <button type="button" class="btn-primary" onclick="window.location.href='index.html'">Volver al inicio</button>
+                    </div>
+                </div>
+            </form>
         </div>
+    </main>
 
-        <form id="checkoutForm">
-            <div class="step-content active" id="step-1">
-                <h2>SELECCIÓN DE ENTRADAS</h2>
-                <div class="card">
-                    <div>
-                        <h3>PASE GENERAL - 2 DÍAS</h3>
-                        <p style="font-size:14px; color:#666;">Acceso completo al campo durante los 2 días.</p>
-                        <div class="price">$35.000</div>
-                    </div>
-                    <div><input type="number" id="qty-general" value="0" min="0" style="width: 70px; text-align:center;"></div>
+<footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CONTACTO AEA</h4>
+                <div class="footer-links">
+                    <a href="https://animalesenadopcionzarate.my.canva.site/" target="_blank">🌐 Sitio Web Oficial</a>
+                    <a href="https://wa.me/5493487543101" target="_blank">💬 WhatsApp (+54 9 3487 543101)</a>
+                    <a href="mailto:aeazarate@outlook.com">✉️ aeazarate@outlook.com</a>
                 </div>
-                <div class="card">
-                    <div>
-                        <h3>PATA VIP - EXPERIENCIA</h3>
-                        <p style="font-size:14px; color:#666;">Zona exclusiva, meet & greet y food trucks.</p>
-                        <div class="price">$60.000</div>
-                    </div>
-                    <div><input type="number" id="qty-vip" value="0" min="0" style="width: 70px; text-align:center;"></div>
-                </div>
-                <div class="card">
-                    <div>
-                        <h3>PACK FAMILIAR</h3>
-                        <p style="font-size:14px; color:#666;">4 Entradas Generales + Zona familiar.</p>
-                        <div class="price">$100.000</div>
-                    </div>
-                    <div><input type="number" id="qty-familiar" value="0" min="0" style="width: 70px; text-align:center;"></div>
-                </div>
-                <div class="btn-container">
-                    <button type="button" class="btn-primary" onclick="nextStep(2)">Continuar a mis datos →</button>
+            </div>
+            
+            <div class="footer-col">
+                <h4>REDES SOCIALES</h4>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/animalesenadopcionzarate/" target="_blank">📷 Instagram Oficial</a>
+                    <a href="https://www.instagram.com/mestizo_byaea/" target="_blank">🛍️ Feria Mestizo</a>
                 </div>
             </div>
 
-            <div class="step-content" id="step-2">
-                <h2>DATOS DEL COMPRADOR</h2>
-                <div class="form-group">
-                    <input type="text" placeholder="Nombre completo" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><input type="text" placeholder="DNI" required></div>
-                    <div class="form-group"><input type="text" placeholder="Teléfono" required></div>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="userEmail" placeholder="Email" required>
-                </div>
-                <div class="btn-container">
-                    <button type="button" class="btn-secondary" onclick="prevStep(1)">← Volver</button>
-                    <button type="button" class="btn-primary" onclick="nextStep(3)">Continuar al pago →</button>
-                </div>
+            <div class="footer-col">
+                <h4>SUMATE COMO PADRINO</h4>
+                <p style="font-size: 14px; color: #ccc; margin-bottom: 10px;">Tu aporte mensual salva vidas.</p>
+                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847fadfa3d017fb97269a40209" target="_blank" class="btn-donar">
+                    🤝 DONAR POR MERCADOPAGO
+                </a>
             </div>
-
-            <div class="step-content" id="step-3">
-                <h2>DETALLES DE PAGO</h2>
-                <div class="form-group">
-                    <input type="text" placeholder="Número de tarjeta (Ej: 4500 1234 ...)" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" placeholder="Nombre como figura en la tarjeta" required>
-                </div>
-                <div class="form-row">
-                    <div class="form-group"><input type="text" placeholder="MM/AA" required></div>
-                    <div class="form-group"><input type="text" placeholder="CVV" required></div>
-                </div>
-                <p style="font-size: 12px; color: #666; text-align: center; margin-top: 10px;">🔒 Pago seguro - Tus datos están protegidos.</p>
-                <div class="btn-container">
-                    <button type="button" class="btn-secondary" onclick="prevStep(2)">← Volver</button>
-                    <button type="button" class="btn-primary" onclick="prepareSummary(); nextStep(4);">Revisar compra →</button>
-                </div>
-            </div>
-
-            <div class="step-content" id="step-4">
-                <h2>RESUMEN DE COMPRA</h2>
-                <div class="card" style="flex-direction: column; align-items: stretch;">
-                    
-                    <div id="summary-items-container"></div>
-                    
-                    <div style="display: flex; justify-content: space-between; font-size: 20px; margin-top: 15px;">
-                        <strong>TOTAL A PAGAR</strong>
-                        <strong style="color: var(--fuchsia-fuzz);" id="final-total">$0</strong>
-                    </div>
-                </div>
-                <p style="font-size: 12px; text-align: center; color: #666; margin-bottom: 20px;">
-                    Al pagar, aceptás los términos y condiciones. Todo lo recaudado es a beneficio de la ONG Animales en Adopción Zárate.
-                </p>
-                <div class="btn-container">
-                    <button type="button" class="btn-secondary" onclick="prevStep(3)">← Volver</button>
-                    <button type="submit" class="btn-primary" style="background-color: var(--purple-haze);">Confirmar y Pagar</button>
-                </div>
-            </div>
-
-            <div class="step-content success-message" id="step-5">
-                <h2>¡ROCK Y SOLIDARIDAD! 🤘🐾</h2>
-                <p>¡Gracias por tu compra y por sumarte a esta causa!</p>
-                <p>Tus entradas digitales han sido enviadas a: <br><strong id="displayEmail" style="color: var(--rock-violet);">tu_correo@email.com</strong></p>
-                <p style="margin-top: 20px; font-weight: bold; background: rgba(140, 81, 183, 0.1); padding: 15px; border-radius: 8px;">
-                    Con tu entrada estás ayudando directamente a rescatar, rehabilitar y buscar familias responsables para los animalitos de Zárate. ¡Nos vemos en el pogo!
-                </p>
-                <div class="btn-container" style="justify-content: center;">
-                    <button type="button" class="btn-primary" onclick="window.location.href='index.html'">Volver al inicio</button>
-                </div>
-            </div>
-        </form>
-    </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 El PataRock Festival Solidario - A beneficio de Animales en Adopción Zárate.</p>
+        </div>
+    </footer>
 
     <script>
         function nextStep(step) {
@@ -336,7 +473,6 @@
             nextStep(step);
         }
 
-        // Calculadora dinámica del resumen
         function prepareSummary() {
             const qtyGen = parseInt(document.getElementById('qty-general').value) || 0;
             const qtyVip = parseInt(document.getElementById('qty-vip').value) || 0;

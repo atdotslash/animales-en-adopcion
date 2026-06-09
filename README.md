@@ -36,12 +36,11 @@ El sitio web está compuesto por 5 páginas principales y un flujo de checkout c
 
 Este proyecto fue realizado por:
 
-* **Sergio [Completar Apellido]**
 * **Horacio Belardita**
 * **Tomás Berón**
 * **Enzo Leiva**
 * **Sergio Ortega**
-* **Edgardo Alberto Sandoval**
+* **Edgardo Sandoval**
 
 ---
 

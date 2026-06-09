@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El PataRock - Festival Solidario en Zárate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-haze: #2A0B42;
+            --fuchsia-fuzz: #D81A85;
+            --rock-violet: #8C51B7;
+            --vintage-bone: #F3EFE0;
+            --grunge-noir: #1A1A1A;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+		body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--grunge-noir); /* Color de respaldo */
+            background-image: url('img/fondo.jpg');
+            background-size: cover; /* Cubre toda la pantalla */
+            background-position: center top;
+            background-attachment: fixed; /* Efecto dinámico al scrollear */
+            color: var(--vintage-bone);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+		/* Navbar */
+        header {
+            background-color: var(--grunge-noir); /* Fondo oscuro para resaltar el logo */
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--purple-haze); /* Línea sutil para separar */
+        }
+        
+        .logo-nav { 
+            height: 45px; /* Un poco más grande para que se lea bien el estilo grunge */
+            filter: drop-shadow(0px 0px 5px rgba(216, 26, 133, 0.3)); /* Brillo fucsia sutil */
+        }
+        
+        nav ul { list-style: none; display: flex; gap: 20px; font-weight: 600; }
+        nav a { text-decoration: none; color: var(--vintage-bone); transition: color 0.3s; }
+        nav a:hover { color: var(--fuchsia-fuzz); }
+
+		/* Menú Hamburguesa */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 3px;
+            background-color: var(--vintage-bone);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+                flex-wrap: wrap; /* Permite que el menú baje si no hay espacio */
+            }
+            .menu-toggle {
+                display: flex; /* Muestra el ícono en celulares */
+            }
+            nav {
+                width: 100%;
+                display: none; /* Oculta los enlaces por defecto */
+            }
+            nav.active {
+                display: block; /* Clase que agregaremos con JavaScript para mostrar el menú */
+            }
+            nav ul {
+                flex-direction: column;
+                gap: 15px;
+                padding-top: 20px;
+                text-align: center;
+            }
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 400px;
+            background: url('img/hero-bandas-placeholder.jpg') center/cover; /* Reemplazar con el collage de bandas */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-logo { width: 60%; max-width: 600px; z-index: 2; }
+
+        /* Tickets Cards */
+        .tickets-section {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            flex-wrap: wrap;
+        }
+
+        .ticket-card {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            width: 250px;
+            padding: 30px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .ticket-card img { height: 80px; margin-bottom: 15px; } /* Reemplazar con íconos de perros */
+        
+        .ticket-card h3 { font-size: 24px; margin-bottom: 20px; color: var(--grunge-noir); font-family: 'Inter', sans-serif; font-weight: 600;}
+
+        .btn-comprar {
+            display: inline-block;
+            text-decoration: none;
+            color: var(--fuchsia-fuzz);
+            font-family: 'Anton', sans-serif;
+            font-size: 22px;
+            transition: transform 0.2s;
+        }
+        
+        .btn-comprar:hover { transform: scale(1.05); }
+
+        /* Banner Medio */
+        .middle-banner {
+            background: url('img/crowd-placeholder.jpg') center/cover; /* Reemplazar con foto del público */
+            text-align: center;
+            padding: 80px 20px 40px;
+            position: relative;
+        }
+
+        .middle-banner-text {
+            background-color: var(--grunge-noir);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .middle-banner h2 { font-size: 36px; color: var(--vintage-bone); }
+        .middle-banner p { font-size: 18px; margin-top: 5px; }
+
+		/* Nuevo estilo para el botón externo */
+		.btn-externo {
+			display: inline-block;
+			padding: 12px 24px;
+			background-color: transparent;
+			color: var(--fuchsia-fuzz);
+			border: 2px solid var(--fuchsia-fuzz);
+			border-radius: 6px;
+			font-family: 'Inter', sans-serif;
+			font-weight: bold;
+			text-decoration: none;
+			transition: all 0.3s ease;
+		}
+
+		.btn-externo:hover {
+			background-color: var(--fuchsia-fuzz);
+			color: white;
+			transform: translateY(-3px);
+		}
+
+
+		/* Info ONG y Mapa */
+        .info-section {
+            background-color: var(--vintage-bone);
+            color: var(--grunge-noir);
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+            grid-auto-rows: auto;
+            gap: 40px; /* Separación pareja entre todos los elementos */
+            align-items: start; /* Clave: alinea todo desde arriba, no al medio */
+        }
+
+        /* Imágenes dinámicas */
+        .dynamic-img {
+            width: 100%;
+            height: 100%;
+            max-height: 280px; /* Limita la altura máxima */
+            object-fit: cover; /* Recorta la imagen limpiamente si sobra espacio, sin dejar huecos */
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .dynamic-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(216, 26, 133, 0.3);
+        }
+
+        .info-img {
+            border: 4px solid var(--fuchsia-fuzz);
+        }
+
+        .map-img {
+            border: 4px solid var(--rock-violet);
+        }
+
+        .info-list { 
+            list-style: none; 
+            font-weight: 600; 
+            font-size: 16px; /* Un poco más sutil */
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            padding-top: 10px; /* Alineación óptica con el borde de la foto */
+        }
+
+        .info-list li { 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .icon-circle { 
+            background-color: var(--fuchsia-fuzz); 
+            min-width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            box-shadow: 0 4px 10px rgba(216, 26, 133, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .info-section { 
+                grid-template-columns: 1fr; /* Una columna en celulares */
+                padding: 40px 20px; 
+            }
+        }
+
+        /* Efecto dinámico de Zoom suave */
+        .dynamic-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            cursor: pointer;
+        }
+
+        .dynamic-img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(216, 26, 133, 0.3); /* Sombra fucsia */
+        }
+
+        .info-img { border: 4px solid var(--fuchsia-fuzz); }
+
+        .info-list { 
+            list-style: none; 
+            font-weight: 600; 
+            font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .info-list li { 
+            display: flex; 
+            align-items: center; 
+            gap: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .info-list li:hover {
+            transform: translateX(10px); /* Pequeño desplazamiento al pasar el mouse */
+        }
+
+        .icon-circle { 
+            background-color: var(--fuchsia-fuzz); 
+            min-width: 50px; 
+            height: 50px; 
+            border-radius: 50%; 
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 10px rgba(216, 26, 133, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .info-section { grid-template-columns: 1fr; padding: 40px 20px; }
+        }
+
+        /* Auspician */
+        .sponsors {
+            background-color: var(--purple-haze);
+            text-align: center;
+            padding: 30px 20px;
+        }
+        .sponsors h3 { font-size: 28px; margin-bottom: 20px; }
+        .sponsors-bar {
+            background-color: var(--vintage-bone);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            color: var(--grunge-noir);
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-style: italic;
+        }
+
+		/* Footer Funcional */
+        footer {
+            background-color: rgba(17, 17, 17, 0.95);
+            padding: 40px 20px 20px;
+            color: var(--vintage-bone);
+            margin-top: auto;
+            border-top: 4px solid var(--purple-haze);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto 30px;
+            text-align: center;
+        }
+
+        .footer-col h4 {
+            font-family: 'Anton', sans-serif;
+            font-size: 24px;
+            color: var(--fuchsia-fuzz);
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 15px;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .footer-links a:hover {
+            color: var(--vintage-bone);
+        }
+
+        .btn-donar {
+            display: inline-block;
+            background-color: #009EE3; /* Color MercadoPago */
+            color: white;
+            text-decoration: none;
+            padding: 12px 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            border-radius: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 10px;
+        }
+
+        .btn-donar:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 158, 227, 0.4);
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+            font-size: 14px;
+            color: #888;
+        }
+
+    </style>
+</head>
+
+<body>
+	<header>
+        <img src="img/logo.png" alt="PataRock Logo" class="logo-nav">
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav id="nav-menu">
+            <ul>
+                <li><a href="index.html">El Festival</a></li>
+                <li><a href="lineup.html">Line-up</a></li>
+                <li><a href="ong.html">ONG Rescate</a></li>
+                <li><a href="tickets.html">Tickets</a></li>
+                <li><a href="ubicacion.html">Ubicación</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <img src="img/logo-patarock-grande.png" alt="El PataRock" class="hero-logo">
+    </section>
+
+    <section class="tickets-section">
+        <div class="ticket-card">
+            <img src="img/icon-dog-1.png" alt="General">
+            <h3>GENERAL</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+        <div class="ticket-card">
+            <img src="img/icon-dog-2.png" alt="Pata VIP">
+            <h3>PATA VIP</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+        <div class="ticket-card">
+            <img src="img/icon-dog-3.png" alt="Familiar">
+            <h3>FAMILIAR</h3>
+            <a href="tickets.html" class="btn-comprar">COMPRAR TICKET</a>
+        </div>
+    </section>
+
+    <section class="middle-banner">
+        <div class="middle-banner-text">
+            <h2>EL FESTIVAL QUE MUEVE EL ROCK Y SALVA VIDAS.</h2>
+            <p>SÁBADO 28 DE MARZO, ZÁRATE. MÚSICA SOLIDARIA.</p>
+        </div>
+    </section>
+
+	<section class="info-section">
+        <img src="img/ong-equipo.jpg" alt="Equipo ONG" class="dynamic-img info-img">
+        
+        <ul class="info-list">
+            <li><span class="icon-circle">🐾</span> 100% DE LA RECAUDACIÓN PARA LAS MASCOTAS</li>
+            <li><span class="icon-circle">💛</span> APOYO DIRECTO A ONG ANIMALES EN ADOPCIÓN ZÁRATE</li>
+            <li><span class="icon-circle">📍</span> ANFITEATRO HOMERO EXPÓSITO, ZÁRATE, BS. AS.</li>
+        </ul>
+
+        <img src="img/mapa-zarate.jpg" alt="Mapa Zárate" class="dynamic-img map-img">
+
+        <ul class="info-list">
+            <li><span class="icon-circle">🐈</span> LLEGÁ CAMINANDO</li>
+            <li><span class="icon-circle">🐩</span> LLEGÁ CORRIENDO</li>
+            <li><span class="icon-circle">🐶</span> LLEGÁ ACOMPAÑADA/O</li>
+        </ul>
+
+
+        <div></div>
+    </section>
+
+    <section class="sponsors">
+        <h3>Auspician</h3>
+        <div class="sponsors-bar">
+            <span>Belardita</span>
+            <span>Berón</span>
+            <span>Leiva</span>
+            <span>Ortega</span>
+            <span>Sandoval</span>
+        </div>
+    </section>
+
+	<footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>CONTACTO AEA</h4>
+                <div class="footer-links">
+                    <a href="https://animalesenadopcionzarate.my.canva.site/" target="_blank">🌐 Sitio Web Oficial</a>
+                    <a href="https://wa.me/5493487543101" target="_blank">💬 WhatsApp (+54 9 3487 543101)</a>
+                    <a href="mailto:aeazarate@outlook.com">✉️ aeazarate@outlook.com</a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>REDES SOCIALES</h4>
+                <div class="footer-links">
+                    <a href="https://www.instagram.com/animalesenadopcionzarate/" target="_blank">📷 Instagram Oficial</a>
+                    <a href="https://www.instagram.com/mestizo_byaea/" target="_blank">🛍️ Feria Mestizo</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>SUMATE COMO PADRINO</h4>
+                <p style="font-size: 14px; color: #ccc; margin-bottom: 10px;">Tu aporte mensual salva vidas.</p>
+                <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380847fadfa3d017fb97269a40209" target="_blank" class="btn-donar">
+                    🤝 DONAR POR MERCADOPAGO
+                </a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 El PataRock Festival Solidario - A beneficio de Animales en Adopción Zárate.</p>
+        </div>
+    </footer>
+	<script>
+        // Función para desplegar el menú en celulares
+        function toggleMenu() {
+            document.getElementById('nav-menu').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
